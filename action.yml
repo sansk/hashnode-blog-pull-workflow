@@ -1,0 +1,92 @@
+name: "Hashnode Blog Pull Action"
+description: "Pull latest blog posts from Hashnode and display them in your profile README"
+author: "sansk"
+
+branding:
+  icon: "rss"
+  color: "orange"
+
+inputs:
+  publication_name:
+    description: "Hashnode publication name (e.g., your-blog-name)"
+    required: true
+
+  post_count:
+    description: "Number of posts to display (1-12)"
+    required: false
+    default: "6"
+
+  display_format:
+    description: "Display format: card, stacked-left, stacked-right, list, table"
+    required: false
+    default: "stacked-left"
+
+  filename:
+    description: "File to update with blog posts"
+    required: false
+    default: "README.md"
+
+  github_token:
+    description: "GitHub token for repository access"
+    required: false
+    default: ${{ github.token }}
+
+  # Customization options
+  card_width:
+    description: "Card width in pixels"
+    required: false
+    default: "500"
+
+  image_width:
+    description: "Image width in pixels"
+    required: false
+    default: "150"
+
+  image_height:
+    description: "Image height in pixels"
+    required: false
+    default: "150"
+
+  date_format:
+    description: "Date format (e.g., MMM DD, YYYY)"
+    required: false
+    default: "MMM DD, YYYY"
+
+  description_length:
+    description: "Maximum description length"
+    required: false
+    default: "200"
+
+  custom_css:
+    description: "Custom CSS styles for cards"
+    required: false
+    default: ""
+
+  section_title:
+    description: "Section title for blog posts"
+    required: false
+    default: "✍️ Latest Blog Posts"
+
+  no_posts_message:
+    description: "Message when no posts found"
+    required: false
+    default: "No blog posts found."
+
+  target_branch:
+    description: "Target branch to commit changes"
+    required: false
+    default: "main"
+
+outputs:
+  posts_count:
+    description: "Number of posts processed"
+
+  file_updated:
+    description: "Whether the file was updated"
+
+  commit_sha:
+    description: "SHA of the commit if file was updated"
+
+runs:
+  using: "node20"
+  main: "dist/index.js"
